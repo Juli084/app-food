@@ -1,9 +1,21 @@
-import { Text, View } from "react-native";
+import { Text, View, ScrollView } from "react-native";
+import { Header } from "../components/header";
+
+import Constants from "expo-constants";
+
+const statusBarHeight = Constants.statusBarHeight
 
 export default function Index() {
   return (
-    <View className="w-full h-full flex justify-center items-center">
-      <Text className="text-xl text-red-400">teste ok!.</Text>
-    </View>
+    <ScrollView 
+    style={{flex: 1}} 
+    className="bg-slate-200"
+    showsHorizontalScrollIndicator={false}
+    >
+      <View className="w-full px-5" style={{marginTop: statusBarHeight + 8}}>
+        <Header />
+      </View>
+      
+    </ ScrollView>
   );
 }
