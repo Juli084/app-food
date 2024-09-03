@@ -8,11 +8,11 @@ const statusBarHeight = Constants.statusBarHeight
 export default function Index() {
   return (
     <ScrollView
-    style={{flex:1}}
+    style={{ flex:1 }}
     className="bg-slate-300"
     showsVerticalScrollIndicator={false}
     >
-      <View className="w-full" style={{ marginTop: statusBarHeight }}>
+      <View className="w-full px-4" style={{ marginTop: statusBarHeight + 8 }}>
         <Header />
       </View>
     </ScrollView>
