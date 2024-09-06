@@ -2,14 +2,14 @@ import { Text, View, ScrollView } from "react-native";
 import { Header } from "../components/header";
 
 import Constants from "expo-constants";
-import Banner from "../components/banner";
+import { Banner } from "../components/banner";
 
 const statusBarHeight = Constants.statusBarHeight;
 
 export default function Index() {
   return (
     <ScrollView
-    style={{ flex:1 }}
+    style={{ flex: 1 }}
     className="bg-slate-300"
     showsVerticalScrollIndicator={false}
     >
