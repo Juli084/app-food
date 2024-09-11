@@ -11,5 +11,7 @@ export function Search() {
       className='w-full h-full flex-1 bg-transparent'
     />
    </View>
+
   );
 }
+
