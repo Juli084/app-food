@@ -5,6 +5,7 @@ import { Header } from "../components/header";
 import { Banner } from "../components/banner";
 import { Search } from "../components/search";
 import { Section } from "../components/section";
+import { TrendingFoods } from "../components/trending";
 
 const statusBarHeight = Constants.statusBarHeight;
 
@@ -30,12 +31,8 @@ export default function Index() {
     size="text-2xl"
    />
 
-  <Section
-    name='comidas em alta'
-    label="Saiba mais"
-    action={ () => console.log("clicou em saiba mais")}
-    size="text-xl"
-   />
-    </ScrollView>
+   <TrendingFoods />
+   
+  </ScrollView>
   );
 }
