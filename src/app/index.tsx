@@ -6,6 +6,7 @@ import { Banner } from "../components/banner";
 import { Search } from "../components/search";
 import { Section } from "../components/section";
 import { TrendingFoods } from "../components/trending";
+import { Restaurants } from "../components/restaurants";
 
 const statusBarHeight = Constants.statusBarHeight;
 
@@ -13,7 +14,7 @@ export default function Index() {
   return (
     <ScrollView
     style={{ flex: 1 }}
-    className="bg-slate-400"
+    className="bg-slate-200"
     showsVerticalScrollIndicator={false}
     >
       <View className="w-full px-4" style={{ marginTop: statusBarHeight + 8 }}>
@@ -32,6 +33,15 @@ export default function Index() {
    />
 
    <TrendingFoods />
+
+   <Section
+    name='Famosos'
+    label="Veja todos"
+    action={ () => console.log("clicou em famosos")}
+    size="text-xl"
+   />
+
+   <Restaurants />
    
   </ScrollView>
   );

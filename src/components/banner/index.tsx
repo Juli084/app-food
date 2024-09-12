@@ -11,7 +11,7 @@ export function Banner() {
             onPress={() => console.log("clicou")}
           >
           <Image
-            source={require("../../assets/foto1.png")}
+            source={require("../../assets/banner1.png")}
             className="w-full h-36 md:h-60 rounded-2xl"
           />
         </Pressable>
@@ -22,7 +22,7 @@ export function Banner() {
             onPress={() => console.log("clicou2")}
           >
           <Image
-            source={require("../../assets/foto2.png")}
+            source={require("../../assets/banner2.png")}
             className="w-full h-36 rounded-2xl"
           />
         </Pressable>
