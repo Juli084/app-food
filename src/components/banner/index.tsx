@@ -1,32 +1,29 @@
-import { View, Pressable, Text, Image } from "react-native";
-import PagerView from "react-native-pager-view";
+import { useState } from 'react';
+import { Image, ScrollView, View, type LayoutChangeEvent } from 'react-native';
 
+const BANNERS = [require('../../assets/banner1.png'), require('../../assets/banner2.png')];
+
+// ScrollView paginado funciona igual no Android, no iOS e na web.
 export function Banner() {
- return (
-   <View className="w-full h-36 md:h-60 rounded-2xl mt-5 mb-4">
-        <PagerView style={{ flex: 1 }} initialPage={0} pageMargin={14}>
-          <Pressable
-            className="w-full h-36 md:h-60 rounded-2xl"
-            key="1"
-            onPress={() => console.log("clicou")}
-          >
-          <Image
-            source={require("../../assets/banner1.png")}
-            className="w-full h-36 md:h-60 rounded-2xl"
-          />
-        </Pressable>
+  const [largura, setLargura] = useState(0);
 
-        <Pressable
-            className="w-full h-36 md:h-60 rounded-2xl"
-            key="2"
-            onPress={() => console.log("clicou2")}
-          >
+  return (
+    <View
+      className="w-full h-36 md:h-60 rounded-2xl mt-5 mb-4 overflow-hidden"
+      onLayout={(event: LayoutChangeEvent) => setLargura(event.nativeEvent.layout.width)}
+    >
+      <ScrollView horizontal pagingEnabled showsHorizontalScrollIndicator={false}>
+        {BANNERS.map((imagem, indice) => (
           <Image
-            source={require("../../assets/banner2.png")}
-            className="w-full h-36 rounded-2xl"
+            key={indice}
+            source={imagem}
+            alt={`Promoção ${indice + 1}`}
+            style={{ width: largura }}
+            className="h-36 md:h-60 rounded-2xl"
+            resizeMode="cover"
           />
-        </Pressable>
-      </PagerView>
-   </View>
- );
+        ))}
+      </ScrollView>
+    </View>
+  );
 }

@@ -1,37 +1,26 @@
-import { useState, useEffect } from "react";
-import { FlatList } from "react-native";
-import { CardFood } from "./food";
+import { FlatList } from 'react-native';
+import { CardFood } from './food';
+import { Aviso, SEM_API } from '../Aviso';
+import { useDados } from '../../hooks/useDados';
+import { contem, type Comida } from '../../services/api';
 
-export interface FoodProps{
-    id: string;
-    name: string;
-    price: number;
-    time: string;
-    delivery: number;
-    rating: number;
-    image: string;
-    restaurants: string;
-}
-export function TrendingFoods() {
-    const [ foods, setFoods ] = useState<FoodProps[]>([])
+export function TrendingFoods({ busca }: { busca: string }) {
+  const estado = useDados<Comida[]>('/foods');
 
-    useEffect(() => {
-        async function getFoods(){
-            const response = await fetch("http://192.168.5.66:3000/foods")
-            const data = await response.json()
-            setFoods(data);
-        }
+  if (estado.tipo === 'carregando') return <Aviso texto="Carregando..." />;
+  if (estado.tipo === 'erro') return <Aviso texto={SEM_API} />;
 
-        getFoods();
-    }, [])
+  const comidas = estado.dados.filter((comida) => contem(comida.name, busca));
+  if (comidas.length === 0) return <Aviso texto="Nenhuma comida encontrada." />;
 
-    return (
-   <FlatList 
-        data={foods}
-        renderItem={ ({ item }) => < CardFood food={item} /> }
-        horizontal={true}
-        contentContainerStyle={{ gap: 14, paddingLeft: 16, paddingRight: 16}}
-        showsHorizontalScrollIndicator={false}
-   />
- );
+  return (
+    <FlatList
+      data={comidas}
+      keyExtractor={(comida) => comida.id}
+      renderItem={({ item }) => <CardFood food={item} />}
+      horizontal
+      contentContainerStyle={{ gap: 14, paddingLeft: 16, paddingRight: 16 }}
+      showsHorizontalScrollIndicator={false}
+    />
+  );
 }
