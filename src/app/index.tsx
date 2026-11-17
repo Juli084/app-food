@@ -1,58 +1,36 @@
-import { Text, View, ScrollView} from "react-native";
-import Constants from 'expo-constants'
+import { useState } from 'react';
+import { ScrollView, View } from 'react-native';
+import Constants from 'expo-constants';
 
-import { Header } from "../components/header";
-import { Banner } from "../components/banner";
-import { Search } from "../components/search";
-import { Section } from "../components/section";
-import { TrendingFoods } from "../components/trending";
-import { Restaurants } from "../components/restaurants";
-import { RestaurantVerticalList } from "../components/restaurantsList";
+import { Header } from '../components/header';
+import { Banner } from '../components/banner';
+import { Search } from '../components/search';
+import { Section } from '../components/section';
+import { TrendingFoods } from '../components/trending';
+import { Restaurants } from '../components/restaurants';
+import { RestaurantVerticalList } from '../components/restaurantsList';
 
 const statusBarHeight = Constants.statusBarHeight;
 
 export default function Index() {
+  const [busca, setBusca] = useState('');
+
   return (
-    <ScrollView
-    style={{ flex: 1 }}
-    className="bg-slate-200"
-    showsVerticalScrollIndicator={false}
-    >
+    <ScrollView style={{ flex: 1 }} className="bg-slate-200" showsVerticalScrollIndicator={false}>
       <View className="w-full px-4" style={{ marginTop: statusBarHeight + 8 }}>
-        
         <Header />
-
         <Banner />
-        <Search />
+        <Search valor={busca} aoMudar={setBusca} />
       </View>
-      
-   <Section
-    name='comidas em alta'
-    label="Saiba mais"
-    action={ () => console.log("clicou em saiba mais")}
-    size="text-2xl"
-   />
 
-   <TrendingFoods />
+      <Section name="Comidas em alta" size="text-2xl" />
+      <TrendingFoods busca={busca} />
 
-   <Section
-    name='Famosos'
-    label="Veja todos"
-    action={ () => console.log("clicou em famosos")}
-    size="text-xl"
-   />
+      <Section name="Famosos" size="text-xl" />
+      <Restaurants busca={busca} />
 
-   <Restaurants />
-
-   <Section
-    name='Restaurantes'
-    label="Veja todos"
-    action={ () => console.log("clicou em Restaurantes")}
-    size="text-xl"
-   />
-
-   <RestaurantVerticalList />
-   
-  </ScrollView>
+      <Section name="Restaurantes" size="text-xl" />
+      <RestaurantVerticalList busca={busca} />
+    </ScrollView>
   );
 }

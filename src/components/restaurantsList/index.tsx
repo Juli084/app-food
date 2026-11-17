@@ -1,31 +1,23 @@
-import { View } from "react-native"
-import { useState, useEffect } from "react";
-import { RestaurantItem } from "./item";
+import { View } from 'react-native';
+import { RestaurantItem } from './item';
+import { Aviso, SEM_API } from '../Aviso';
+import { useDados } from '../../hooks/useDados';
+import { contem, type Restaurante } from '../../services/api';
 
-export interface RestaurantsProps{
-    id: string; 
-    name: string;
-    image: string;
-}
+export function RestaurantVerticalList({ busca }: { busca: string }) {
+  const estado = useDados<Restaurante[]>('/restaurants');
 
-export function RestaurantVerticalList() {
- const [ restaurants, setRestaurants ] = useState<RestaurantsProps[]>([])
+  if (estado.tipo === 'carregando') return <Aviso texto="Carregando..." />;
+  if (estado.tipo === 'erro') return <Aviso texto={SEM_API} />;
 
- useEffect(() => {
-    async function getFoods(){
-        const response = await fetch("http://192.168.5.66:3000/restaurants")
-        const data = await response.json()
-        setRestaurants(data);
-    }
+  const restaurantes = estado.dados.filter((restaurante) => contem(restaurante.name, busca));
+  if (restaurantes.length === 0) return <Aviso texto="Nenhum restaurante encontrado." />;
 
-    getFoods();
-}, [])
-
-return (
+  return (
     <View className="px-4 flex-1 w-full h-full mb-11 gap-4">
-        {restaurants.map( item => (
-            <RestaurantItem item={item} key={item.id} />
-        ))}
+      {restaurantes.map((item) => (
+        <RestaurantItem item={item} key={item.id} />
+      ))}
     </View>
-    );
+  );
 }
