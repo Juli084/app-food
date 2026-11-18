@@ -7,13 +7,17 @@
     "android": "expo start --android",
     "ios": "expo start --ios",
     "web": "expo start --web",
-    "api": "json-server db.json --port 3000",
+    "api": "node scripts/preparar-api.mjs && json-server .dados/db.json --port 3000",
     "build:web": "expo export --platform web",
     "lint": "expo lint",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "api:limpar": "node scripts/preparar-api.mjs --limpar",
+    "test": "vitest run",
+    "test:e2e": "playwright test"
   },
   "dependencies": {
     "@expo/vector-icons": "^15.0.2",
+    "@react-native-async-storage/async-storage": "2.2.0",
     "eslint-config-expo": "~58.0.4",
     "expo": "^58.0.26",
     "expo-constants": "~58.0.16",
@@ -38,10 +42,15 @@
   },
   "devDependencies": {
     "@babel/core": "^7.29.7",
+    "@playwright/test": "^1.65.1",
+    "@types/node": "24.19.2",
     "@types/react": "~19.3.0",
     "eslint": "^9.39.5",
     "json-server": "^1.0.0-beta.3",
-    "typescript": "~6.0.3"
+    "serve": "14.2.8",
+    "typescript": "~6.0.3",
+    "vite": "8.3.8",
+    "vitest": "^5.1.1"
   },
   "private": true
 }

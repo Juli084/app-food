@@ -1,87 +1,113 @@
 {
-    "restaurants": [
-      { 
-        "id": "1", 
-        "name": "KFC", 
-        "image": "https://i.imgur.com/sZ1Jye3.png"
-      },
-      { 
-        "id": "2", 
-        "name": "McDonald's", 
-        "image": "https://i.imgur.com/su4iB3p.png"
-      },
-      { 
-        "id": "3", 
-        "name": "Outback", 
-        "image": "https://i.imgur.com/jg3GJVN.png"
-      },
-      { 
-        "id": "4", 
-        "name": "Sushi Dev", 
-        "image": "https://i.imgur.com/ffYWFBX.png"
-      },
-      { 
-        "id": "5", 
-        "name": "Burguer Grill", 
-        "image": "https://i.imgur.com/kmQvG2T.png"
-      },
-      { 
-        "id": "6", 
-        "name": "Marmitas express", 
-        "image": "https://i.imgur.com/uXRuDFD.png"
-      }
-    ],
-    "foods": [
-      { 
-        "id": "1", 
-        "name": "Frango assado", 
-        "price": 39.90,
-        "time": "50-60 min",
-        "delivery": 5.99,
-        "rating": 4.8,
-        "image": "https://i.imgur.com/CEVUdju.png",
-        "restaurantId": "1"
-  
-      },
-      { 
-        "id": "2", 
-        "name": "Marmita fit", 
-        "price": 29,
-        "time": "30-40 min",
-        "delivery": 2.99,
-        "rating": 4.9,
-        "image": "https://i.imgur.com/uXRuDFD.png",
-        "restaurantId": "6"
-      },
-      { 
-        "id": "3", 
-        "name": "Burguer Dev", 
-        "price": 40,
-        "time": "50-60 min",
-        "delivery": 5.99,
-        "rating": 4.5,
-        "image": "https://i.imgur.com/O5c3lyU.png",
-        "restaurantId": "5"
-      },
-      { 
-        "id": "4", 
-        "name": "Picanha Grill", 
-        "price": 36,
-        "time": "50-60 min",
-        "delivery": 5.99,
-        "rating": 4.4,
-        "image": "https://i.imgur.com/0UjG3wk.png",
-        "restaurantId": "3"
-      },
-      { 
-        "id": "5", 
-        "name": "Açai 300ml", 
-        "price": 20,
-        "time": "20-30 min",
-        "delivery": 2.99,
-        "rating": 4.4,
-        "image": "https://i.imgur.com/BaUUCkc.png",
-        "restaurantId": "3"
-      }
-    ]
-  }
+  "restaurantes": [
+    {
+      "id": "1",
+      "nome": "Brasa & Cia",
+      "categoria": "brasileira",
+      "nota": 4.8,
+      "avaliacoes": 412,
+      "tempoMin": 45,
+      "tempoMax": 60,
+      "taxaEntrega": 599,
+      "pedidoMinimo": 3000,
+      "capa": "https://i.imgur.com/CEVUdju.png",
+      "bairro": "Campolim"
+    },
+    {
+      "id": "2",
+      "nome": "Marmitaria da Vila",
+      "categoria": "saudavel",
+      "nota": 4.9,
+      "avaliacoes": 1280,
+      "tempoMin": 25,
+      "tempoMax": 35,
+      "taxaEntrega": 0,
+      "pedidoMinimo": 2000,
+      "capa": "https://i.imgur.com/uXRuDFD.png",
+      "bairro": "Vila Hortência"
+    },
+    {
+      "id": "3",
+      "nome": "Chapa Quente Burger",
+      "categoria": "lanches",
+      "nota": 4.6,
+      "avaliacoes": 867,
+      "tempoMin": 30,
+      "tempoMax": 45,
+      "taxaEntrega": 499,
+      "pedidoMinimo": 2500,
+      "capa": "https://i.imgur.com/O5c3lyU.png",
+      "bairro": "Centro"
+    },
+    {
+      "id": "4",
+      "nome": "Sakura Delivery",
+      "categoria": "japonesa",
+      "nota": 4.7,
+      "avaliacoes": 539,
+      "tempoMin": 40,
+      "tempoMax": 55,
+      "taxaEntrega": 799,
+      "pedidoMinimo": 4000,
+      "capa": "https://i.imgur.com/ffYWFBX.png",
+      "bairro": "Jardim Vergueiro"
+    },
+    {
+      "id": "5",
+      "nome": "Açaí do Parque",
+      "categoria": "doces",
+      "nota": 4.5,
+      "avaliacoes": 302,
+      "tempoMin": 15,
+      "tempoMax": 25,
+      "taxaEntrega": 0,
+      "pedidoMinimo": 1500,
+      "capa": "https://i.imgur.com/BaUUCkc.png",
+      "bairro": "Parque Campolim"
+    },
+    {
+      "id": "6",
+      "nome": "Forno da Esquina",
+      "categoria": "pizza",
+      "nota": 4.4,
+      "avaliacoes": 198,
+      "tempoMin": 50,
+      "tempoMax": 70,
+      "taxaEntrega": 699,
+      "pedidoMinimo": 4500,
+      "capa": null,
+      "bairro": "Além Ponte"
+    }
+  ],
+  "produtos": [
+    { "id": "101", "restauranteId": "1", "secao": "Mais pedidos", "nome": "Frango assado inteiro", "descricao": "Frango temperado na brasa, com farofa e vinagrete.", "preco": 3990, "imagem": "https://i.imgur.com/CEVUdju.png", "emAlta": true },
+    { "id": "102", "restauranteId": "1", "secao": "Mais pedidos", "nome": "Picanha na brasa", "descricao": "300 g de picanha, arroz, feijão tropeiro e mandioca.", "preco": 5990, "imagem": "https://i.imgur.com/0UjG3wk.png", "emAlta": true },
+    { "id": "103", "restauranteId": "1", "secao": "Acompanhamentos", "nome": "Mandioca frita", "descricao": "Porção para duas pessoas.", "preco": 1890, "imagem": null, "emAlta": false },
+    { "id": "104", "restauranteId": "1", "secao": "Bebidas", "nome": "Refrigerante 2 L", "descricao": null, "preco": 1390, "imagem": null, "emAlta": false },
+
+    { "id": "201", "restauranteId": "2", "secao": "Marmitas", "nome": "Marmita fit de frango", "descricao": "Frango grelhado, arroz integral, brócolis e cenoura. 450 g.", "preco": 2900, "imagem": "https://i.imgur.com/uXRuDFD.png", "emAlta": true },
+    { "id": "202", "restauranteId": "2", "secao": "Marmitas", "nome": "Marmita de carne de panela", "descricao": "Carne de panela, arroz, feijão e legumes. 500 g.", "preco": 3200, "imagem": null, "emAlta": false },
+    { "id": "203", "restauranteId": "2", "secao": "Marmitas", "nome": "Marmita vegetariana", "descricao": "Grão-de-bico, quinoa, abóbora assada e folhas.", "preco": 2700, "imagem": null, "emAlta": false },
+    { "id": "204", "restauranteId": "2", "secao": "Bebidas", "nome": "Suco natural 500 ml", "descricao": "Laranja, limão ou maracujá.", "preco": 990, "imagem": null, "emAlta": false },
+
+    { "id": "301", "restauranteId": "3", "secao": "Mais pedidos", "nome": "Smash duplo", "descricao": "Dois smash de 90 g, cheddar duplo, picles e cebola na chapa.", "preco": 3690, "imagem": "https://i.imgur.com/O5c3lyU.png", "emAlta": true },
+    { "id": "302", "restauranteId": "3", "secao": "Lanches", "nome": "Burger da casa", "descricao": "Blend de 160 g, queijo prato, bacon e molho da casa.", "preco": 3990, "imagem": "https://i.imgur.com/kmQvG2T.png", "emAlta": false },
+    { "id": "303", "restauranteId": "3", "secao": "Lanches", "nome": "X-Salada", "descricao": "Hambúrguer, queijo, alface, tomate e maionese.", "preco": 2490, "imagem": null, "emAlta": false },
+    { "id": "304", "restauranteId": "3", "secao": "Porções", "nome": "Batata frita M", "descricao": "400 g, com sal e páprica.", "preco": 2290, "imagem": null, "emAlta": false },
+    { "id": "305", "restauranteId": "3", "secao": "Bebidas", "nome": "Refrigerante lata", "descricao": null, "preco": 700, "imagem": null, "emAlta": false },
+
+    { "id": "401", "restauranteId": "4", "secao": "Combinados", "nome": "Combinado 20 peças", "descricao": "Sashimi de salmão, uramaki, hossomaki e niguiri.", "preco": 6990, "imagem": "https://i.imgur.com/ffYWFBX.png", "emAlta": true },
+    { "id": "402", "restauranteId": "4", "secao": "Quentes", "nome": "Hot roll 10 peças", "descricao": "Salmão e cream cheese empanados, com molho tarê.", "preco": 3490, "imagem": null, "emAlta": false },
+    { "id": "403", "restauranteId": "4", "secao": "Quentes", "nome": "Yakisoba de frango", "descricao": "Macarrão, frango e legumes salteados. Serve 1.", "preco": 3890, "imagem": null, "emAlta": false },
+
+    { "id": "501", "restauranteId": "5", "secao": "Açaí", "nome": "Açaí 300 ml", "descricao": "Com banana, granola e leite condensado.", "preco": 2000, "imagem": "https://i.imgur.com/BaUUCkc.png", "emAlta": true },
+    { "id": "502", "restauranteId": "5", "secao": "Açaí", "nome": "Açaí 500 ml", "descricao": "Com morango, paçoca e leite em pó.", "preco": 2800, "imagem": null, "emAlta": false },
+    { "id": "503", "restauranteId": "5", "secao": "Bebidas", "nome": "Água de coco", "descricao": "300 ml.", "preco": 800, "imagem": null, "emAlta": false },
+
+    { "id": "601", "restauranteId": "6", "secao": "Pizzas grandes", "nome": "Margherita", "descricao": "Molho de tomate, muçarela, tomate e manjericão. 8 fatias.", "preco": 5490, "imagem": null, "emAlta": false },
+    { "id": "602", "restauranteId": "6", "secao": "Pizzas grandes", "nome": "Calabresa", "descricao": "Muçarela, calabresa e cebola. 8 fatias.", "preco": 5290, "imagem": null, "emAlta": false },
+    { "id": "603", "restauranteId": "6", "secao": "Pizzas grandes", "nome": "Frango com requeijão", "descricao": "Frango desfiado e requeijão cremoso. 8 fatias.", "preco": 5790, "imagem": null, "emAlta": false },
+    { "id": "604", "restauranteId": "6", "secao": "Bebidas", "nome": "Refrigerante 2 L", "descricao": null, "preco": 1390, "imagem": null, "emAlta": false }
+  ],
+  "pedidos": []
+}
