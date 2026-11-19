@@ -13,12 +13,13 @@ test('faz o pedido na demonstração sem chamar API nenhuma e guarda no aparelho
   });
   page.on('pageerror', (erro) => erros.push(erro.message));
 
-  await page.goto('/');
-  await page.getByRole('button', { name: /^Brasa & Cia/ }).click();
-  // A picanha também aparece em "Em alta hoje", na tela inicial que o Expo Router mantém na página.
-  await page.getByRole('button', { name: 'Picanha na brasa, R$ 59,90' }).last().click();
-  await page.getByRole('button', { name: /^Adicionar/ }).click();
-  await page.getByRole('button', { name: /Ver sacola/ }).click();
+  // Entra pelo link direto: a página do restaurante é gerada na exportação.
+  await page.goto('/restaurante/1');
+  await expect(page.getByRole('heading', { name: 'Brasa & Cia' })).toBeVisible();
+  // O Expo Router pode manter outras telas na página; só o botão visível é o desta tela.
+  await page.getByRole('button', { name: 'Picanha na brasa, R$ 59,90' }).filter({ visible: true }).click();
+  await page.getByRole('button', { name: /^Adicionar/ }).filter({ visible: true }).click();
+  await page.getByRole('button', { name: /Ver sacola/ }).filter({ visible: true }).click();
   await page.getByLabel('Endereço de entrega').fill('Rua das Flores, 123, Campolim');
   await page.getByRole('button', { name: /Fazer pedido/ }).click();
   await expect(page.getByText(/Na demonstração, ele não vai a restaurante nenhum/)).toBeVisible();
