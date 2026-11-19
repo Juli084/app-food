@@ -1,4 +1,4 @@
-import { readFileSync } from 'node:fs';
+import { existsSync, readFileSync } from 'node:fs';
 import { describe, expect, it } from 'vitest';
 import { agruparPorSecao, FILTROS_INICIAIS, filtrarRestaurantes, reais, textoDaEntrega } from '../src/dominio/filtros';
 import { adicionar, calcularTotais, mudarQuantidade, recomecarCom, restaurarSacola, SACOLA_VAZIA, type Sacola } from '../src/dominio/sacola';
@@ -16,6 +16,21 @@ function adicionarOk(sacola: Sacola, id: string, quantidade = 1, observacao = ''
 }
 
 describe('dados de exemplo', () => {
+  it('apontam para fotos empacotadas com o app, sem servidor de imagem externo', () => {
+    const mapa = readFileSync('src/imagens.ts', 'utf-8');
+    for (const r of dados.restaurantes) {
+      expect(r.capa, r.id).toMatch(/^[a-z0-9-]+$/);
+      expect(existsSync(`assets/restaurantes/${r.capa}.webp`), r.id).toBe(true);
+      expect(mapa, r.id).toContain(`require('../assets/restaurantes/${r.capa}.webp')`);
+    }
+    for (const p of dados.produtos) {
+      if (p.imagem === null) continue;
+      expect(p.imagem, p.id).toMatch(/^[a-z0-9-]+$/);
+      expect(existsSync(`assets/pratos/${p.imagem}.webp`), p.id).toBe(true);
+      expect(mapa, p.id).toContain(`require('../assets/pratos/${p.imagem}.webp')`);
+    }
+  });
+
   it('não usam nome de rede ou marca registrada', () => {
     const texto = JSON.stringify(dados).toLowerCase();
     for (const marca of ['kfc', "mcdonald", 'outback', 'catupiry', 'coca-cola', 'ifood']) expect(texto).not.toContain(marca);

@@ -7,6 +7,14 @@ import { BarraDaSacola, Carregando, Confirmacao, FalhaNaApi, FotoDoRestaurante, 
 import { useLoja } from '../../contexto/Loja';
 import { agruparPorSecao, reais, textoDaEntrega } from '../../dominio/filtros';
 import type { Produto } from '../../dominio/tipos';
+import { fotoDoPrato } from '../../imagens';
+
+// O tamanho vai no style: na versão web, uma imagem empacotada traz a própria largura e
+// altura, que passariam por cima das classes.
+function FotoDoPrato({ produto, largura, altura, className }: { produto: Produto; largura: number | '100%'; altura: number; className: string }) {
+  const foto = fotoDoPrato(produto.imagem);
+  return foto ? <Image source={foto} alt="" style={{ width: largura, height: altura }} className={className} /> : null;
+}
 
 function Voltar() {
   return (
@@ -117,7 +125,7 @@ export default function TelaDoRestaurante() {
                   ) : null}
                   <Text className="mt-1.5 font-semibold text-tinta">{reais(produto.preco)}</Text>
                 </View>
-                {produto.imagem ? <Image source={{ uri: produto.imagem }} alt="" className="h-20 w-20 rounded-xl bg-linha" /> : null}
+                <FotoDoPrato produto={produto} largura={80} altura={80} className="rounded-xl bg-linha" />
               </Pressable>
             ))}
           </View>
@@ -131,7 +139,7 @@ export default function TelaDoRestaurante() {
           {produtoAberto ? (
             <View accessibilityViewIsModal className="max-h-[90%] rounded-t-3xl bg-white">
               <ScrollView>
-                {produtoAberto.imagem ? <Image source={{ uri: produtoAberto.imagem }} alt="" className="h-56 w-full rounded-t-3xl bg-linha" /> : null}
+                <FotoDoPrato produto={produtoAberto} largura="100%" altura={256} className="rounded-t-3xl bg-linha" />
                 <View className="p-5">
                   <View className="flex-row items-start justify-between gap-3">
                     <Text accessibilityRole="header" className="flex-1 text-xl font-bold text-tinta">
