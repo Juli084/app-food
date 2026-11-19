@@ -46,8 +46,9 @@ test('busca, monta a sacola, respeita o restaurante e faz o pedido', async ({ pa
     await page.getByRole('radio', { name: /Cartão/ }).click();
     await page.getByRole('button', { name: /Fazer pedido/ }).click();
     await expect(page.getByText('Pedido enviado ao restaurante.')).toBeVisible();
-    await expect(page.getByText('2x Smash duplo')).toBeVisible();
-    await expect(page.getByText('R$ 78,79 · Cartão')).toBeVisible();
+    // O pedido mais novo vem primeiro; a API pode ter pedidos de execuções anteriores.
+    await expect(page.getByText('2x Smash duplo').first()).toBeVisible();
+    await expect(page.getByText('R$ 78,79 · Cartão').first()).toBeVisible();
   });
 
   await test.step('pede de novo com os preços de hoje', async () => {
