@@ -7,6 +7,10 @@ Android, no iOS e na web.
 Os dados vêm de um `json-server` local, a partir de [`db.json`](db.json). Os restaurantes são
 fictícios, de Sorocaba.
 
+**Demonstração na web:** [app-food-gamma.vercel.app](https://app-food-gamma.vercel.app). Ela roda
+sem servidor: o cardápio vai junto com o site e os pedidos ficam guardados só no navegador de
+quem testa.
+
 ![Telas do App Food na versão web: início com pratos em alta, cardápio de um restaurante e prato aberto](docs/telas.webp)
 
 ## O que faz
@@ -51,11 +55,18 @@ pedidos no arquivo que serve. O `npm run api:limpar` recomeça a partir do `db.j
 O endereço da API vem de `EXPO_PUBLIC_API_URL`. Na web e no simulador do iOS, `localhost` funciona;
 no emulador do Android use `http://10.0.2.2:3000`; num celular físico, o IP do computador na rede.
 
+### Modo de demonstração
+
+Com `EXPO_PUBLIC_MODO=demonstracao`, o app não chama API nenhuma: lê restaurantes e cardápio do
+`db.json` empacotado e guarda os pedidos no aparelho (`src/services/apiLocal.ts`). É assim que a
+versão web é publicada na Vercel, pelo `vercel.json`. Depois de um pedido, o aviso diz que, na
+demonstração, ele não vai a restaurante nenhum.
+
 ## Testes
 
 ```bash
 npm test            # regras da sacola, busca, filtros e conferência dos dados de exemplo
-npm run test:e2e    # o pedido inteiro na versão web, com a API de verdade
+npm run test:e2e    # o pedido inteiro na versão web, com a API de verdade, e a demonstração sem API
 ```
 
 O teste de ponta a ponta exporta a versão web, sobe o json-server numa cópia limpa dos dados e
