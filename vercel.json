@@ -2,17 +2,16 @@
   "$schema": "https://openapi.vercel.sh/vercel.json",
   "framework": null,
   "installCommand": "npm ci --legacy-peer-deps",
-  "buildCommand": "EXPO_PUBLIC_MODO=demonstracao npx expo export --platform web --output-dir dist",
+  "buildCommand": "EXPO_PUBLIC_MODO=demonstracao npx expo export --platform web --output-dir dist && cp dist/+not-found.html dist/404.html",
   "outputDirectory": "dist",
   "cleanUrls": true,
-  "rewrites": [{ "source": "/restaurante/:id", "destination": "/restaurante/[id].html" }],
   "headers": [
     {
       "source": "/(.*)",
       "headers": [
         {
           "key": "Content-Security-Policy",
-          "value": "default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; font-src 'self' data:; connect-src 'self'; manifest-src 'self'; base-uri 'none'; form-action 'none'; frame-ancestors 'none'; object-src 'none'"
+          "value": "default-src 'self'; script-src 'self' 'sha256-67fhrP0+BkBqmgGGXTtgiVO/9EQs3QruYNU/7fnRkI8='; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; font-src 'self' data:; connect-src 'self'; manifest-src 'self'; base-uri 'none'; form-action 'none'; frame-ancestors 'none'; object-src 'none'"
         },
         { "key": "X-Content-Type-Options", "value": "nosniff" },
         { "key": "Referrer-Policy", "value": "strict-origin-when-cross-origin" },
