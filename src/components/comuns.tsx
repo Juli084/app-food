@@ -120,7 +120,7 @@ export function BarraDaSacola({ onAbrir }: { onAbrir: () => void }) {
       <Pressable
         onPress={onAbrir}
         accessibilityRole="button"
-        accessibilityLabel={`Ver sacola: ${totais.quantidade} itens, ${reais(totais.subtotal)}`}
+        accessibilityLabel={`Ver sacola: ${totais.quantidade} ${totais.quantidade === 1 ? 'item' : 'itens'}, ${reais(totais.subtotal)}`}
         className="flex-row items-center gap-3 rounded-2xl bg-marca px-4 py-3.5 shadow-lg"
       >
         <View className="h-7 min-w-7 items-center justify-center rounded-full bg-white/25 px-1.5">
