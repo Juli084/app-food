@@ -7,6 +7,8 @@ Android, no iOS e na web.
 Os dados vêm de um `json-server` local, a partir de [`db.json`](db.json). Os restaurantes são
 fictícios, de Sorocaba.
 
+![Telas do App Food na versão web: início com pratos em alta, cardápio de um restaurante e prato aberto](docs/telas.webp)
+
 ## O que faz
 
 - **Busca por restaurante ou por prato.** Quem digita "picanha" vê os restaurantes que servem
@@ -77,8 +79,10 @@ ponta.
 - **Sem pagamento online.** O pagamento é escolhido no app e feito na entrega.
 - **Sem login.** "Meus pedidos" mostra todos os pedidos da API, porque o json-server é uma API de
   demonstração, sem usuários. Num produto de verdade, o pedido teria dono e autenticação.
-- **Fotos.** As fotos dos pratos vêm de links externos (imgur) herdados da primeira versão;
-  restaurante sem foto aparece com as iniciais.
+- **Fotos ilustrativas.** As 28 fotos (6 restaurantes e 22 pratos) foram geradas com o gerador
+  de imagens do Canva e vão empacotadas com o app, em WebP. A API guarda só a chave da foto
+  (`"imagem": "picanha"`), e `src/imagens.ts` resolve o arquivo. Restaurante com chave sem foto
+  aparece com as iniciais.
 
 ## Histórico
 
@@ -88,3 +92,5 @@ ponta.
 - **2026, segunda atualização:** virou um fluxo completo de pedido, com cardápio por restaurante,
   sacola, pedidos gravados e favoritos. Os restaurantes passaram a ser fictícios, e saíram os
   banners de banco de imagens.
+- **2026, fotos e ícone:** as fotos hospedadas no imgur deram lugar a fotos empacotadas com o
+  app, todos os pratos ganharam foto, e o ícone padrão do Expo foi trocado por um ícone próprio.
