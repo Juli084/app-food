@@ -8,7 +8,7 @@ import { useLoja } from '../contexto/Loja';
 import { reais } from '../dominio/filtros';
 import { adicionar, SACOLA_VAZIA } from '../dominio/sacola';
 import type { Pedido } from '../dominio/tipos';
-import { api } from '../services/api';
+import { api, MODO_DEMONSTRACAO } from '../services/api';
 
 const NOMES_DO_PAGAMENTO: Record<Pedido['pagamento'], string> = { pix: 'Pix', cartao: 'Cartão', dinheiro: 'Dinheiro' };
 
@@ -77,7 +77,11 @@ export default function TelaDePedidos() {
           {novo ? (
             <View accessibilityRole="alert" className="flex-row items-center gap-3 rounded-2xl bg-[#e6f4ea] p-4">
               <Feather name="check-circle" size={22} color="#2b8a3e" />
-              <Text className="flex-1 font-semibold text-[#1e6b30]">Pedido enviado ao restaurante.</Text>
+              <Text className="flex-1 font-semibold text-[#1e6b30]">
+                {MODO_DEMONSTRACAO
+                  ? 'Pedido registrado. Na demonstração, ele não vai a restaurante nenhum e fica guardado só neste aparelho.'
+                  : 'Pedido enviado ao restaurante.'}
+              </Text>
             </View>
           ) : null}
           {pedidos.map((pedido) => (
