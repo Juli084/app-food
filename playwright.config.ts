@@ -30,5 +30,13 @@ export default defineConfig({
       reuseExistingServer: false,
       timeout: 300_000,
     },
+    {
+      // A mesma versão web no modo da demonstração publicada, sem API.
+      command: 'npx expo export --platform web --output-dir dist-demo && npx serve dist-demo -l 4177 -s',
+      url: 'http://localhost:4177',
+      env: { EXPO_PUBLIC_MODO: 'demonstracao' },
+      reuseExistingServer: false,
+      timeout: 300_000,
+    },
   ],
 });
