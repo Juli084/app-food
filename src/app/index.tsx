@@ -7,6 +7,7 @@ import { BarraDaSacola, CartaoRestaurante, Carregando, FalhaNaApi } from '../com
 import { useLoja } from '../contexto/Loja';
 import { FILTROS_INICIAIS, filtrarRestaurantes, reais, type Filtros } from '../dominio/filtros';
 import { CATEGORIAS } from '../dominio/tipos';
+import { fotoDoPrato } from '../imagens';
 
 const ORDENS: { valor: Filtros['ordem']; nome: string }[] = [
   { valor: 'relevancia', nome: 'Relevância' },
@@ -37,7 +38,7 @@ export default function Inicio() {
     () => (catalogo.estado === 'ok' ? filtrarRestaurantes(catalogo.restaurantes, catalogo.produtos, filtros, favoritos) : []),
     [catalogo, filtros, favoritos],
   );
-  const emAlta = catalogo.estado === 'ok' ? catalogo.produtos.filter((produto) => produto.emAlta && produto.imagem) : [];
+  const emAlta = catalogo.estado === 'ok' ? catalogo.produtos.filter((produto) => produto.emAlta && fotoDoPrato(produto.imagem)) : [];
   const filtrando = filtros.busca.trim() !== '' || filtros.categoria !== null || filtros.entregaGratis || filtros.ate30Minutos || filtros.nota45;
   const ordemAtual = ORDENS.find((ordem) => ordem.valor === filtros.ordem) ?? ORDENS[0]!;
 
@@ -122,7 +123,7 @@ export default function Inicio() {
                   accessibilityLabel={`${produto.nome}, ${reais(produto.preco)}`}
                   className="w-40"
                 >
-                  <Image source={{ uri: produto.imagem! }} alt="" className="h-32 w-40 rounded-2xl bg-linha" />
+                  <Image source={fotoDoPrato(produto.imagem)!} alt="" style={{ width: 160, height: 128 }} className="rounded-2xl bg-linha" />
                   <Text className="mt-1.5 font-semibold text-tinta" numberOfLines={1}>
                     {produto.nome}
                   </Text>

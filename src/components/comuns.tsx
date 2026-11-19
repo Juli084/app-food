@@ -4,6 +4,7 @@ import { ActivityIndicator, Image, Modal, Pressable, Text, View } from 'react-na
 import { useLoja } from '../contexto/Loja';
 import { reais, textoDaEntrega } from '../dominio/filtros';
 import type { Restaurante } from '../dominio/tipos';
+import { fotoDoRestaurante } from '../imagens';
 
 const CORES_DO_MONOGRAMA = ['#d9480f', '#2b8a3e', '#1971c2', '#9c36b5', '#e67700', '#0c8599'];
 
@@ -26,10 +27,11 @@ export function Monograma({ nome, tamanho = 64 }: { nome: string; tamanho?: numb
 }
 
 export function FotoDoRestaurante({ restaurante, tamanho = 64 }: { restaurante: Restaurante; tamanho?: number }) {
-  if (!restaurante.capa) return <Monograma nome={restaurante.nome} tamanho={tamanho} />;
+  const foto = fotoDoRestaurante(restaurante.capa);
+  if (!foto) return <Monograma nome={restaurante.nome} tamanho={tamanho} />;
   return (
     <Image
-      source={{ uri: restaurante.capa }}
+      source={foto}
       alt=""
       style={{ width: tamanho, height: tamanho }}
       className="rounded-2xl bg-linha"
