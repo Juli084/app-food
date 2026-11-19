@@ -1,3 +1,5 @@
+import { createHash } from 'node:crypto';
+import { readFileSync } from 'node:fs';
 import { expect, test } from '@playwright/test';
 
 // A versão publicada roda sem servidor: cardápio empacotado e pedidos guardados no aparelho.
@@ -25,4 +27,17 @@ test('faz o pedido na demonstração sem chamar API nenhuma e guarda no aparelho
   await expect(page.getByText('1x Picanha na brasa')).toBeVisible();
   expect(chamadasDeApi).toEqual([]);
   expect(erros).toEqual([]);
+});
+
+test('cada página exportada tem só scripts que a política de segurança da Vercel libera', async ({ request }) => {
+  const politica = JSON.stringify(JSON.parse(readFileSync('vercel.json', 'utf-8')).headers);
+  for (const caminho of ['/', '/restaurante/4', '/sacola', '/pedidos']) {
+    const html = await (await request.get(caminho)).text();
+    const embutidos = [...html.matchAll(/<script(?![^>]*\bsrc=)[^>]*>([\s\S]*?)<\/script>/g)].map((m) => m[1] ?? '');
+    for (const script of embutidos) {
+      const hash = `sha256-${createHash('sha256').update(script).digest('base64')}`;
+      expect(politica, `${caminho}: ${script.slice(0, 60)}`).toContain(hash);
+    }
+    expect(html, caminho).not.toMatch(/ on[a-z]+="/);
+  }
 });

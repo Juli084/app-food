@@ -8,6 +8,13 @@ import { useLoja } from '../../contexto/Loja';
 import { agruparPorSecao, reais, textoDaEntrega } from '../../dominio/filtros';
 import type { Produto } from '../../dominio/tipos';
 import { fotoDoPrato } from '../../imagens';
+import dados from '../../../db.json';
+
+// Na exportação web, gera uma página por restaurante do db.json (restaurante/1.html...),
+// para o link direto de um restaurante abrir sem depender de regra do servidor.
+export async function generateStaticParams(): Promise<{ id: string }[]> {
+  return dados.restaurantes.map((restaurante) => ({ id: restaurante.id }));
+}
 
 // O tamanho vai no style: na versão web, uma imagem empacotada traz a própria largura e
 // altura, que passariam por cima das classes.
